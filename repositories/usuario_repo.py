@@ -50,6 +50,7 @@ class UsuarioRepo:
         except sqlite3.Error as ex:
             print(ex)
             return None
+<<<<<<< HEAD
         
     @classmethod
     def obter_todos(cls) -> List[Usuario]:
@@ -62,6 +63,8 @@ class UsuarioRepo:
         except sqlite3.Error as ex:
             print(ex)
             return None
+=======
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 
     @classmethod
     def alterar(cls, usuario: Usuario) -> bool:

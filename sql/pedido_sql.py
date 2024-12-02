@@ -73,9 +73,12 @@ SQL_OBTER_POR_ESTADO = """
     FROM pedido
     WHERE (id_cliente = ?) AND (estado = ?)
 """
+<<<<<<< HEAD
 
 SQL_OBTER_TODOS_POR_ESTADO = """
     SELECT id, data_hora, valor_total, endereco_entrega, estado, id_cliente
     FROM pedido
     WHERE (estado = ?)
 """
+=======
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981

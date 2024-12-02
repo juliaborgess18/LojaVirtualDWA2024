@@ -1,7 +1,11 @@
 from datetime import datetime
 import sqlite3
 from typing import List, Optional
+<<<<<<< HEAD
 from models.pedido_model import EstadoPedido, Pedido
+=======
+from models.pedido_model import Pedido
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 from repositories.item_pedido_repo import ItemPedidoRepo
 from sql.pedido_sql import *
 from util.database import obter_conexao
@@ -55,7 +59,11 @@ class PedidoRepo:
             return False
 
     @classmethod
+<<<<<<< HEAD
     def alterar_estado(cls, id: int, novo_estado: str) -> bool:
+=======
+    def alterar_estado(cls, id: int, novo_estado: int) -> bool:
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
@@ -131,7 +139,10 @@ class PedidoRepo:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
                 tupla = cursor.execute(SQL_OBTER_POR_ID, (id,)).fetchone()
+<<<<<<< HEAD
                 if not tupla: return None
+=======
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
                 pedido = Pedido(*tupla)
                 return pedido
         except sqlite3.Error as ex:
@@ -207,6 +218,7 @@ class PedidoRepo:
         except sqlite3.Error as ex:
             print(ex)
             return None
+<<<<<<< HEAD
         
     @classmethod
     def obter_todos_por_estado(cls, estado: int) -> List[Pedido]:
@@ -221,3 +233,5 @@ class PedidoRepo:
         except sqlite3.Error as ex:
             print(ex)
             return None
+=======
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981

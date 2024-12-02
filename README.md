@@ -1,7 +1,10 @@
 # Loja Virtual
 
+<<<<<<< HEAD
 (22 de outubro de 2024)
 
+=======
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 Loja virtual desenvolvida durante a disciplina de Desenvolvimento Web Avançado no Ifes Cachoeiro.
 
 ## Como Usar Este Projeto
@@ -97,6 +100,7 @@ Para configurar o MailerSender, siga as instruções no arquivo [mailersend.md](
 
 Para configurar o Mercado Pago, siga as instruções no arquivo [mercadopago.md](mercadopago.md).
 
+<<<<<<< HEAD
 # Extensões Úteis para VSCode
 
  - Bootstrap 5 Quick Snippets
@@ -110,6 +114,8 @@ Para configurar o Mercado Pago, siga as instruções no arquivo [mercadopago.md]
  - SQLite Viewer
  - vscode-icons
 
+=======
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 ## Referências
 
 - [How To Work With Multiple Github Accounts on a single Machine](https://gist.github.com/rahularity/86da20fe3858e6b311de068201d279e3)

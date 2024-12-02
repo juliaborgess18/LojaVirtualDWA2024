@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import asyncio
 from io import BytesIO
 from typing import List, Optional
@@ -24,11 +25,20 @@ from util.images import transformar_em_quadrada
 
 SLEEP_TIME = 0.2
 # router = APIRouter(prefix="/admin")
+=======
+from fastapi import APIRouter
+
+from dtos.novo_produto_dto import NovoProdutoDTO
+from repositories.produto_repo import ProdutoRepo
+
+
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 router = APIRouter(prefix="/manager")
 
 
 @router.get("/obter_produtos")
 async def obter_produtos():
+<<<<<<< HEAD
     await asyncio.sleep(SLEEP_TIME)
     produtos = ProdutoRepo.obter_todos()
     return produtos
@@ -275,3 +285,11 @@ async def excluir_categoria(id_categoria: int):
         ["body", "id_categoria"],
     )
     return JSONResponse(pd.to_dict(), status_code=404)
+=======
+    produtos = ProdutoRepo.obter_todos()
+    return produtos
+
+@router.post("/inserir_produto")
+async def inserir_produto(produto: NovoProdutoDTO):
+    pass
+>>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
