@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "nome": "Computadores"
+    },
+    {
+        "id": 2,
+        "nome": "Periféricos"
+    },
+    {
+        "id": 3,
+        "nome": "Hardwares"
+    },
+    {
+        "id": 4,
+        "nome": "Video-games"
+    },
+    {
+        "id": 5,
+        "nome": "Smartphones"
+    },
+    {
+        "id": 6,
+        "nome": "Outros"
+    }
+]
