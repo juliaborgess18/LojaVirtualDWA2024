@@ -1,5 +1,7 @@
 # Loja Virtual
 
+Dupla: Alison Mozer e Júlia Borges.
+
 (22 de outubro de 2024)
 
 Loja virtual desenvolvida durante a disciplina de Desenvolvimento Web Avançado no Ifes Cachoeiro.
