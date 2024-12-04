@@ -21,15 +21,29 @@
             </li>
         </ul>
     </nav>
-    <div>
+    <div class="me-3">
         <form action="/buscar" method="get">
             <input type="hidden" name="p" value="{{ pagina_atual }}">
             <input type="hidden" name="q" value="{{ termo_busca }}">
-            <input type="hidden" name="tp" value="{{ tamanho_pagina }}">            
+            <input type="hidden" name="tp" value="{{ tamanho_pagina }}">
+            <input type="hidden" name="ca" value="{{ categoria_atual }}">           
             <select name="o" class="form-control" onchange="this.form.submit()">
                 <option value="1" {{ 'selected' if ordem == 1 else '' }}>Nome</option>
                 <option value="2" {{ 'selected' if ordem == 2 else '' }}>Menor Preço</option>
                 <option value="3" {{ 'selected' if ordem == 3 else '' }}>Maior Preço</option>
+            </select>
+        </form>
+    </div>
+    <div>
+        <form action="/buscar" method="get">
+            <input type="hidden" name="p" value="{{ pagina_atual }}">
+            <input type="hidden" name="q" value="{{ termo_busca }}">
+            <input type="hidden" name="tp" value="{{ tamanho_pagina }}"> 
+            <input type="hidden" name="ca" value="{{ categoria_atual }}">            
+            <select name="ca" class="form-control" onchange="this.form.submit()">
+                {% for categoria in  categorias %}
+                    <option value={{ categoria.id }} {{ 'selected' if categoria_atual == categoria.id else '' }}>{{ categoria.nome }}</option>
+                {% endfor %}
             </select>
         </form>
     </div>

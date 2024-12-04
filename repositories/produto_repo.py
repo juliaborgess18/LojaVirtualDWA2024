@@ -101,19 +101,27 @@ class ProdutoRepo:
 
     @classmethod
     def obter_busca(
-        cls, termo: str, pagina: int, tamanho_pagina: int, ordem: int
+        cls, termo: str, pagina: int, tamanho_pagina: int, ordem: int, categoria: int
     ) -> List[Produto]:
         termo = "%" + termo + "%"
         offset = (pagina - 1) * tamanho_pagina
+        filtro_categoria = ''
+        
+        if categoria != 0:
+            filtro_categoria = f"AND id_categoria = {categoria}"
+            
+        SQL_OBTER_BUSCA_COM_FILTRO = SQL_OBTER_BUSCA.replace("#2", filtro_categoria)
+        
         match (ordem):
             case 1:
-                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA.replace("#1", "nome")
+                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA_COM_FILTRO.replace("#1", "nome")
             case 2:
-                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA.replace("#1", "preco ASC")
+                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA_COM_FILTRO.replace("#1", "preco ASC")
             case 3:
-                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA.replace("#1", "preco DESC")
+                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA_COM_FILTRO.replace("#1", "preco DESC")
             case _:
-                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA.replace("#1", "nome")
+                SQL_OBTER_BUSCA_ORDENADA = SQL_OBTER_BUSCA_COM_FILTRO.replace("#1", "nome")
+                
         try:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()

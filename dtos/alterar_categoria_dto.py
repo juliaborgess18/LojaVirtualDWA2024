@@ -4,10 +4,10 @@ from util.validators import is_greater_than, is_project_name
 
 
 class AlterarCategoriaDTO(BaseModel):
-    id_categoria: int
+    id: int
     nome: str
     
-    @field_validator("id_categoria")
+    @field_validator("id")
     def validar_id_produto(cls, v):
         msg = is_greater_than(v, "Id da Categoria", 0)
         if msg: raise ValueError(msg)

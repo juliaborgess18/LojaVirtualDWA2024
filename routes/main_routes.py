@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, Query, Request, status
 from fastapi.responses import HTMLResponse, JSONResponse
 
 from dtos.entrar_dto import EntrarDto
+from repositories.categoria_repo import CategoriaRepo
 from util.html import ler_html
 from dtos.inserir_usuario_dto import InserirUsuarioDTO
 from models.usuario_model import Usuario
@@ -139,10 +140,13 @@ async def get_buscar(
     p: int = 1,
     tp: int = 6,
     o: int = 1,
+    ca: int = 0
 ):
-    produtos = ProdutoRepo.obter_busca(q, p, tp, o)
+    produtos = ProdutoRepo.obter_busca(q, p, tp, o, ca)
     qtde_produtos = ProdutoRepo.obter_quantidade_busca(q)
     qtde_paginas = math.ceil(qtde_produtos / float(tp))
+    categorias = CategoriaRepo.obter_todos()
+    
     return templates.TemplateResponse(
         "pages/buscar.html",
         {
@@ -153,5 +157,7 @@ async def get_buscar(
             "pagina_atual": p,
             "termo_busca": q,
             "ordem": o,
+            "categorias": categorias,
+            "categoria_atual": ca
         },
     )

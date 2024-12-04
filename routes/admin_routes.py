@@ -23,8 +23,7 @@ from repositories.usuario_repo import UsuarioRepo
 from util.images import transformar_em_quadrada
 
 SLEEP_TIME = 0.2
-# router = APIRouter(prefix="/admin")
-router = APIRouter(prefix="/manager")
+router = APIRouter(prefix="/admin")
 
 
 @router.get("/obter_produtos")
@@ -40,14 +39,15 @@ async def inserir_produto(
     preco: float = Form(...),
     descricao: str = Form(...),
     estoque: int = Form(...),
-    # id_categoria: int = Form(...),
+    id_categoria: int = Form(...),
     imagem: Optional[UploadFile] = File(None)
 ):    
     produto_dto = InserirProdutoDto(
         nome=nome,
         preco=preco,
         descricao=descricao,
-        estoque=estoque
+        estoque=estoque,
+        id_categoria=id_categoria
     )
     conteudo_arquivo = await imagem.read()
     imagem = Image.open(BytesIO(conteudo_arquivo))
@@ -60,9 +60,8 @@ async def inserir_produto(
         )
         return JSONResponse(pd.to_dict(), status_code=422)
     await asyncio.sleep(SLEEP_TIME)
-    # TODO: Quem for adaptar o frontend, terminar de alterar esse método para receber o id_categoria, substituir o número '1' abaixo
     novo_produto = Produto(
-        None, produto_dto.nome, produto_dto.preco, produto_dto.descricao, produto_dto.estoque, 1
+        None, produto_dto.nome, produto_dto.preco, produto_dto.descricao, produto_dto.estoque, id_categoria
     )
     novo_produto = ProdutoRepo.inserir(novo_produto)
     if novo_produto:
@@ -243,31 +242,27 @@ async def obter_categoria(id_categoria: int):
     )
     return JSONResponse(pd.to_dict(), status_code=404)
 
-@router.post("/post_categoria", status_code=201)
-async def inserir_categoria(categoria: NovaCategoriaDTO):
-    categoria_data = categoria.model_dump()
-    nova_categoria = CategoriaRepo.inserir(Categoria(**categoria_data))
-    # TODO: Quem for criar o frontend, favor verificar se é necessária alguma tratativa de erros aqui
+@router.post("/inserir_categoria", status_code=201)
+async def inserir_categoria(nome: str = Form(...)):
+    nova_categoria = CategoriaRepo.inserir(Categoria(nome=nome))
     return nova_categoria
 
 @router.post("/alterar_categoria", status_code=204)
 async def alterar_categoria(inputDto: AlterarCategoriaDTO):
-    if CategoriaRepo.alterar(Categoria(inputDto.id_categoria, inputDto.nome)):
+    if CategoriaRepo.alterar(Categoria(inputDto.id, inputDto.nome)):
         return None
-    # TODO: Quem for criar o frontend, favor verificar se é necessária alguma tratativa de erros aqui
     pd = ProblemDetailsDto(
         "int",
-        f"A Categoria com id <b>{inputDto.id_categoria}</b> não foi encontrado.",
+        f"A Categoria com id <b>{inputDto.id}</b> não foi encontrado.",
         "value_not_found",
         ["body", "id_categoria"],
     )
     return JSONResponse(pd.to_dict(), status_code=404)
 
-@router.post("/excluir_categoria/{id_categoria:int}", status_code=204)
-async def excluir_categoria(id_categoria: int):
+@router.post("/excluir_categoria", status_code=204)
+async def excluir_categoria(id_categoria: int = Form(...)):
     if CategoriaRepo.excluir(id_categoria):
         return None
-    # TODO: Quem for criar o frontend, favor verificar se é necessária alguma tratativa de erros aqui
     pd = ProblemDetailsDto(
         "int",
         f"A Categoria com id <b>{id_categoria}</b> não foi encontrado.",
