@@ -9,9 +9,5 @@ pillow
 bcrypt
 mercadopago
 python-dotenv
-<<<<<<< HEAD
 mailersend
 pyJWT
-=======
-mailersend
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981

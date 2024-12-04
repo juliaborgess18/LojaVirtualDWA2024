@@ -1,5 +1,4 @@
 import math
-<<<<<<< HEAD
 from fastapi import APIRouter, HTTPException, Query, Request, status
 from fastapi.responses import HTMLResponse, JSONResponse
 
@@ -20,28 +19,6 @@ from util.pydantic import create_validation_errors
 from util.templates import obter_jinja_templates
 
 
-=======
-from sqlite3 import DatabaseError
-from fastapi import APIRouter, HTTPException, Query, Request, status
-from fastapi.responses import HTMLResponse, JSONResponse
-
-from dtos.entrar_dto import EntrarDTO
-from util.html import ler_html
-from dtos.novo_usuario_dto import NovoUsuarioDTO
-from models.usuario_model import Usuario
-from repositories.usuario_repo import UsuarioRepo
-from repositories.produto_repo import ProdutoRepo
-from util.auth import (
-    conferir_senha,
-    gerar_token,
-    obter_hash_senha,
-)
-
-from util.cookies import adicionar_cookie_auth, adicionar_mensagem_sucesso
-from util.pydantic import create_validation_errors
-from util.templates import obter_jinja_templates
-
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 router = APIRouter(include_in_schema=False)
 templates = obter_jinja_templates("templates/main")
 
@@ -81,11 +58,7 @@ async def get_cadastro(request: Request):
 
 
 @router.post("/post_cadastro", response_class=JSONResponse)
-<<<<<<< HEAD
 async def post_cadastro(cliente_dto: InserirUsuarioDTO):
-=======
-async def post_cadastro(cliente_dto: NovoUsuarioDTO):
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     cliente_data = cliente_dto.model_dump(exclude={"confirmacao_senha"})
     cliente_data["senha"] = obter_hash_senha(cliente_data["senha"])
     novo_cliente = UsuarioRepo.inserir(Usuario(**cliente_data))
@@ -117,11 +90,7 @@ async def get_entrar(
 
 
 @router.post("/post_entrar", response_class=JSONResponse)
-<<<<<<< HEAD
 async def post_entrar(entrar_dto: EntrarDto):
-=======
-async def post_entrar(entrar_dto: EntrarDTO):
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     cliente_entrou = UsuarioRepo.obter_por_email(entrar_dto.email)
     if (
         (not cliente_entrou)
@@ -136,30 +105,18 @@ async def post_entrar(entrar_dto: EntrarDTO):
             ),
             status_code=status.HTTP_404_NOT_FOUND,
         )
-<<<<<<< HEAD
     token = criar_token(cliente_entrou.id, cliente_entrou.nome, cliente_entrou.email, cliente_entrou.perfil)
     # O código a seguir é apenas para autenticação baseada em cookies
     # if not UsuarioRepo.alterar_token(cliente_entrou.id, token):
     #     raise DatabaseError(
     #         "Não foi possível alterar o token do cliente no banco de dados."
     #     )
-=======
-    token = gerar_token()
-    if not UsuarioRepo.alterar_token(cliente_entrou.id, token):
-        raise DatabaseError(
-            "Não foi possível alterar o token do cliente no banco de dados."
-        )
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     response = JSONResponse(content={"redirect": {"url": entrar_dto.return_url}})
     adicionar_mensagem_sucesso(
         response,
         f"Olá, <b>{cliente_entrou.nome}</b>. Seja bem-vindo(a) à Loja Virtual!",
     )
-<<<<<<< HEAD
     adicionar_cookie_auth(response, token, TEMPO_COOKIE_AUTH)
-=======
-    adicionar_cookie_auth(response, token)
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     return response
 
 

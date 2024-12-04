@@ -22,11 +22,7 @@ class ProdutoRepo:
                 cursor = conexao.cursor()
                 cursor.execute(
                     SQL_INSERIR,
-<<<<<<< HEAD
                     (produto.nome, produto.preco, produto.descricao, produto.estoque, produto.id_categoria),
-=======
-                    (produto.nome, produto.preco, produto.descricao, produto.estoque),
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
                 )
                 if cursor.rowcount > 0:
                     produto.id = cursor.lastrowid
@@ -59,10 +55,7 @@ class ProdutoRepo:
                         produto.preco,
                         produto.descricao,
                         produto.estoque,
-<<<<<<< HEAD
                         produto.id_categoria,
-=======
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
                         produto.id,
                     ),
                 )
@@ -88,10 +81,7 @@ class ProdutoRepo:
             with obter_conexao() as conexao:
                 cursor = conexao.cursor()
                 tupla = cursor.execute(SQL_OBTER_UM, (id,)).fetchone()
-<<<<<<< HEAD
                 if not tupla: return None
-=======
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
                 produto = Produto(*tupla)
                 return produto
         except sqlite3.Error as ex:

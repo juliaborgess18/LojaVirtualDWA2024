@@ -24,15 +24,12 @@ SQL_OBTER_TODOS_POR_PERFIL = """
     ORDER BY nome
 """
 
-<<<<<<< HEAD
 SQL_OBTER_TODOS = """
     SELECT id, nome, cpf, data_nascimento, endereco, telefone, email
     FROM usuario
     ORDER BY nome
 """
 
-=======
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
 SQL_ALTERAR = """
     UPDATE usuario
     SET nome=?, cpf=?, data_nascimento=?, endereco=?, telefone=?, email=?

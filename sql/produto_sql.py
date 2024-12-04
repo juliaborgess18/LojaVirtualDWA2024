@@ -4,7 +4,6 @@ SQL_CRIAR_TABELA = """
         nome TEXT NOT NULL,
         preco FLOAT NOT NULL,
         descricao TEXT NOT NULL,
-<<<<<<< HEAD
         estoque INTEGER NOT NULL,
         id_categoria INTEGER NOT NULL,
         FOREIGN KEY (id_categoria) REFERENCES categoria(id))
@@ -17,29 +16,13 @@ SQL_INSERIR = """
 
 SQL_OBTER_TODOS = """
     SELECT id, nome, preco, descricao, estoque, id_categoria
-=======
-        estoque INTEGER NOT NULL)
-"""
-
-SQL_INSERIR = """
-    INSERT INTO produto(nome, preco, descricao, estoque)
-    VALUES (?, ?, ?, ?)
-"""
-
-SQL_OBTER_TODOS = """
-    SELECT id, nome, preco, descricao, estoque
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     FROM produto
     ORDER BY nome
 """
 
 SQL_ALTERAR = """
     UPDATE produto
-<<<<<<< HEAD
     SET nome=?, preco=?, descricao=?, estoque=?, id_categoria=?
-=======
-    SET nome=?, preco=?, descricao=?, estoque=?
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     WHERE id=?
 """
 
@@ -49,11 +32,7 @@ SQL_EXCLUIR = """
 """
 
 SQL_OBTER_UM = """
-<<<<<<< HEAD
     SELECT id, nome, preco, descricao, estoque, id_categoria
-=======
-    SELECT id, nome, preco, descricao, estoque
->>>>>>> aae658d356c8ba08adc33219f8cb390ce4cb0981
     FROM produto
     WHERE id=?
 """
